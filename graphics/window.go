@@ -8,19 +8,25 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
-
-	_ "image/png" // Ensure the PNG format is supported
 )
 
-var img *ebiten.Image
+var stoneImg *ebiten.Image
+var woodImg *ebiten.Image
 
-//go:embed resources/brick_2.png
-var brickImageData []byte
+//go:embed resources/stone.png
+var stoneImageData []byte
+
+//go:embed resources/wood.png
+var woodImageData []byte
 
 func init() {
 	var err error
-	log.Println(len(brickImageData))
-	img, _, err = ebitenutil.NewImageFromReader(bytes.NewReader(brickImageData))
+	stoneImg, _, err = ebitenutil.NewImageFromReader(bytes.NewReader(stoneImageData))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	woodImg, _, err = ebitenutil.NewImageFromReader(bytes.NewReader(woodImageData))
 	if err != nil {
 		log.Fatal(err)
 	}
