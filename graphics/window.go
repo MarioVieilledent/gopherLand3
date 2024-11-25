@@ -8,7 +8,6 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
-	"github.com/hajimehoshi/ebiten/v2/inpututil"
 
 	_ "image/png" // Ensure the PNG format is supported
 )
@@ -37,12 +36,7 @@ type Window struct {
 }
 
 func (w *Window) Update() error {
-	if inpututil.IsKeyJustReleased(ebiten.KeyF11) {
-		w.fullScreen = !w.fullScreen
-		ebiten.SetFullscreen(w.fullScreen)
-	}
-	_, dy := ebiten.Wheel()
-	w.scale += w.zoomFactor * dy
+	manageInput(w)
 	return nil
 }
 
