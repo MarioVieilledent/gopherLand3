@@ -1,0 +1,12 @@
+{
+  "window": {
+    "defaultWindowWidth": 600,
+    "defaultWindowHeight": 400
+  },
+  "graphics": {
+    "tileSize": 1024
+  },
+  "input": {
+    "zoomFactor": 0.01
+  }
+}
