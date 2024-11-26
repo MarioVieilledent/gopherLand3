@@ -2,6 +2,7 @@ package graphics
 
 import (
 	"bytes"
+	"image"
 	"log"
 
 	_ "embed"
@@ -10,25 +11,30 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
-var stoneImg *ebiten.Image
-var woodImg *ebiten.Image
+var textureImage *ebiten.Image
 
-//go:embed resources/stone.png
-var stoneImageData []byte
+//go:embed resources/textures.png
+var textureImageData []byte
 
-//go:embed resources/wood.png
-var woodImageData []byte
+var textures map[string]*ebiten.Image
 
 func init() {
 	var err error
-	stoneImg, _, err = ebitenutil.NewImageFromReader(bytes.NewReader(stoneImageData))
+	textureImage, _, err = ebitenutil.NewImageFromReader(bytes.NewReader(textureImageData))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	woodImg, _, err = ebitenutil.NewImageFromReader(bytes.NewReader(woodImageData))
-	if err != nil {
-		log.Fatal(err)
+	textures = make(map[string]*ebiten.Image)
+
+	spriteRegions := map[string]image.Rectangle{
+		"player":   image.Rect(0, 0, 32, 32),
+		"enemy":    image.Rect(32, 0, 64, 32),
+		"item":     image.Rect(64, 0, 96, 32),
+		"platform": image.Rect(0, 32, 64, 64),
+	}
+	for key, rect := range spriteRegions {
+		textures[key] = textureImage.SubImage(rect).(*ebiten.Image)
 	}
 }
 
@@ -64,7 +70,7 @@ func StartWindow() {
 		windowWidth:  config.Window.DefaultWindowWidth,
 		windowHeight: config.Window.DefaultWindowHeight,
 		tileSize:     config.Graphics.TileSize,
-		scale:        1.0 / 4.0,
+		scale:        4.0,
 		zoomFactor:   config.Input.ZoomFactor,
 	}
 

@@ -12,5 +12,5 @@ func manageInput(window *Window) {
 		ebiten.SetFullscreen(window.fullScreen)
 	}
 	_, dy := ebiten.Wheel()
-	window.scale += window.zoomFactor * dy
+	window.scale += window.zoomFactor * dy * window.scale
 }

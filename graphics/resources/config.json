@@ -4,9 +4,9 @@
     "defaultWindowHeight": 400
   },
   "graphics": {
-    "tileSize": 1024
+    "tileSize": 16
   },
   "input": {
-    "zoomFactor": 0.01
+    "zoomFactor": 0.1
   }
 }

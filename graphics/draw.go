@@ -15,12 +15,12 @@ func DrawScreen(window *Window, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(window.scale, window.scale)
 
-	screen.DrawImage(stoneImg, op)
+	screen.DrawImage(textures["player"], op)
 	op.GeoM.Translate(
 		window.scale*float64(window.tileSize),
 		0,
 	)
-	screen.DrawImage(woodImg, op)
+	screen.DrawImage(textures["enemy"], op)
 
 	ebitenutil.DebugPrint(screen, "Yo")
 	ebitenutil.DebugPrint(screen, "\nfullScreen = "+strconv.FormatBool(window.fullScreen))
